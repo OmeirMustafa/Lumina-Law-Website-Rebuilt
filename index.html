@@ -32,7 +32,7 @@
                             600: '#D97706',
                         },
                         slate: {
-                            900: '#0f172a', /* Charcoal / Navy Depth */
+                            900: '#0f172a',
                             800: '#1e293b',
                             700: '#334155',
                             600: '#475569',
@@ -45,16 +45,12 @@
                         'lift': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
                     },
                     animation: {
-                        'hero-headline': 'fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards',
-                        'hero-content': 'slideUpFade 0.8s ease-out forwards',
+                        'hero-headline': 'fadeInUp 0.8s ease-out forwards',
+                        'hero-content': 'fadeInUp 0.8s ease-out forwards',
                         'scroll-reveal': 'reveal 0.4s ease-out forwards',
                     },
                     keyframes: {
                         fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(1rem)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        slideUpFade: {
                             '0%': { opacity: '0', transform: 'translateY(1.5rem)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
@@ -70,7 +66,7 @@
 
     <style>
         .institutional-nav {
-            background-color: rgba(255, 255, 255, 0.98);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid #e2e8f0;
@@ -95,7 +91,7 @@
 </head>
 
 <body
-    class="bg-white text-slate-600 font-sans antialiased selection:bg-amber-500 selection:text-white overflow-x-hidden">
+    class="bg-white text-slate-900 font-sans antialiased selection:bg-amber-500 selection:text-white overflow-x-hidden">
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 institutional-nav">
@@ -128,54 +124,58 @@
     <main class="relative pt-20">
 
         <!-- Hero Section -->
-        <section class="relative min-h-[85vh] flex items-center overflow-hidden">
+        <section class="relative h-screen min-h-[600px] flex items-center overflow-hidden">
 
-            <!-- Background Image: Right Center (Force Family Right) -->
-            <div class="absolute inset-0 z-0 bg-white">
-                <img src="hero-bg.png" alt="Family enjoying time on beach" class="w-full h-full object-cover"
-                    style="object-position: right center;">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0 bg-slate-50">
+                <img src="hero-bg-wide.png" alt="Family enjoying time on beach" class="w-full h-full object-cover"
+                    style="object-position: center right;">
             </div>
 
-            <!-- Gradient Overlay: Strict Solid White (Left) -> Transparent (Right) -->
-            <!-- White 0% -> White 50% -> Transparent 100% -->
-            <div class="absolute inset-0 z-10"
-                style="background: linear-gradient(to right, #ffffff 0%, #ffffff 40%, rgba(255,255,255,0) 100%);">
+            <!-- Desktop Gradient Overlay -->
+            <div class="hidden md:block absolute inset-0 z-10"
+                style="background: linear-gradient(to right, #ffffff 0%, #ffffff 48%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,0) 90%);">
             </div>
 
-            <!-- Content Container: Max 50% width -->
-            <div class="relative z-20 w-full max-w-7xl mx-auto px-6">
-                <div class="w-full md:w-1/2 max-w-2xl">
+            <!-- Mobile/Tablet Overlay (Simple fade for basic contrast behind container) -->
+            <div class="md:hidden absolute inset-0 z-10 bg-white/30 backdrop-blur-[2px]"></div>
 
-                    <!-- Headline: Deep Navy Blue -->
+            <!-- Content Container -->
+            <div class="relative z-20 max-w-7xl mx-auto px-6 w-full flex items-center h-full">
+                <!-- Mobile: Centered, Glass Container | Desktop: Left Aligned, Transparent Container -->
+                <div
+                    class="w-full md:w-1/2 max-w-2xl mx-auto md:mx-0 flex flex-col justify-center bg-white/90 backdrop-blur-md md:bg-transparent md:backdrop-blur-none p-8 md:p-0 rounded-2xl md:rounded-none shadow-xl md:shadow-none border border-white/50 md:border-none">
+
+                    <!-- Headline -->
                     <h1
                         class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] mb-6 opacity-0-start animate-hero-headline">
                         Estate Planning That Minimizes Risk, Tax, and Conflict.
                     </h1>
 
-                    <!-- Subhead: Darker contrast -->
-                    <p class="text-lg md:text-xl text-slate-800 font-medium mb-8 leading-relaxed opacity-0-start animate-hero-content"
-                        style="animation-delay: 500ms;">
+                    <!-- Subhead -->
+                    <p class="text-lg md:text-xl text-slate-900 font-medium mb-8 leading-relaxed opacity-0-start animate-hero-content"
+                        style="animation-delay: 300ms;">
                         Practical legal guidance for British Columbia families — estate planning, probate, and trust
                         administration with clear fees and multilingual support.
                     </p>
 
-                    <!-- Trust Pills: Solid Light Grey BG (bg-slate-100) with Dark Text -->
+                    <!-- Trust Pills -->
                     <div class="flex flex-wrap gap-2 mb-10 opacity-0-start animate-hero-content"
-                        style="animation-delay: 600ms;">
+                        style="animation-delay: 300ms;">
                         <span
-                            class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200 shadow-sm">
+                            class="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-[#F3F4F6] text-slate-900 border border-[#E5E7EB]">
                             English · Mandarin · Hokkien · Tagalog
                         </span>
                         <span
-                            class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200 shadow-sm">
+                            class="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-[#F3F4F6] text-slate-900 border border-[#E5E7EB]">
                             Remote Consultations Available
                         </span>
                     </div>
 
                     <!-- CTA -->
-                    <div class="flex gap-4 opacity-0-start animate-hero-content" style="animation-delay: 700ms;">
+                    <div class="flex gap-4 opacity-0-start animate-hero-content" style="animation-delay: 500ms;">
                         <a href="#calculator"
-                            class="px-8 py-4 rounded-lg font-bold text-white shadow-lg transition-all transform hover:-translate-y-1 hover:shadow-xl inline-flex items-center bg-amber-500 hover:bg-amber-600 border border-amber-600/20">
+                            class="px-8 py-4 rounded-lg font-bold text-white shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center bg-amber-500 hover:bg-amber-600">
                             Calculate Probate Fees
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -183,6 +183,7 @@
                             </svg>
                         </a>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -197,7 +198,7 @@
                             class="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center mb-6 border border-amber-100 text-amber-600">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                                 </path>
                             </svg>
                         </div>
