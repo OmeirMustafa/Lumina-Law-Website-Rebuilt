@@ -130,18 +130,21 @@
         <!-- Hero Section -->
         <section class="relative min-h-[85vh] flex items-center overflow-hidden">
 
-            <!-- Background Image -->
-            <div class="absolute inset-0 z-0">
-                <img src="hero-bg.png" alt="Family enjoying time on beach"
-                    class="w-full h-full object-cover object-right">
+            <!-- Background Image: Right Center (80%) -->
+            <div class="absolute inset-0 z-0 bg-slate-50">
+                <img src="hero-bg.png" alt="Family enjoying time on beach" class="w-full h-full object-cover"
+                    style="object-position: 80% center;">
             </div>
 
-            <!-- Gradient Overlay: White -> Transparent -->
-            <div class="absolute inset-0 z-10 bg-gradient-to-r from-[#fffbf7] via-[#fffbf7]/90 to-transparent"></div>
+            <!-- Gradient Overlay: Strict Left-to-Right Fade (White -> Trans) -->
+            <!-- 0% White -> 40% White (80%) -> 100% Transparent -->
+            <div class="absolute inset-0 z-10"
+                style="background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.8) 40%, transparent 100%);">
+            </div>
 
-            <!-- Content Container -->
-            <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
-                <div class="max-w-2xl">
+            <!-- Content Container: Max 50% width -->
+            <div class="relative z-20 w-full max-w-7xl mx-auto px-6">
+                <div class="w-full md:w-1/2 max-w-2xl">
 
                     <!-- Headline -->
                     <h1
@@ -156,15 +159,15 @@
                         administration with clear fees and multilingual support.
                     </p>
 
-                    <!-- Trust Pills -->
+                    <!-- Trust Pills: Light Grey BG for visibility -->
                     <div class="flex flex-wrap gap-2 mb-10 opacity-0-start animate-hero-content"
                         style="animation-delay: 600ms;">
                         <span
-                            class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white/60 text-slate-800 border border-slate-300/50 backdrop-blur-sm shadow-sm">
+                            class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-slate-800 border border-gray-200 shadow-sm">
                             English · Mandarin · Hokkien · Tagalog
                         </span>
                         <span
-                            class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white/60 text-slate-800 border border-slate-300/50 backdrop-blur-sm shadow-sm">
+                            class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-slate-800 border border-gray-200 shadow-sm">
                             Remote Consultations Available
                         </span>
                     </div>
