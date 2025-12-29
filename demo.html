@@ -132,6 +132,19 @@
                 transform: translateY(0);
             }
         }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu {
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -142,7 +155,7 @@
     <nav class="fixed top-0 left-0 w-full z-50 institutional-nav" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-2 group">
+            <a href="#" class="flex items-center gap-2 group z-50 relative">
                 <div
                     class="relative w-8 h-8 bg-slate-900 rounded-sm flex items-center justify-center overflow-hidden shadow-sm group-hover:shadow-md transition-all duration-300">
                     <div
@@ -213,12 +226,36 @@
                 </a>
             </div>
 
-            <button class="lg:hidden text-slate-600 p-2">
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden text-slate-900 focus:outline-none p-2 z-50 relative" onclick="toggleMobileMenu()"
+                aria-label="Toggle Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="lg:hidden bg-white border-b border-slate-200 shadow-xl absolute top-20 left-0 w-full">
+            <div class="px-6 py-6 space-y-4 flex flex-col text-center">
+                <a href="#services" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Services</a>
+                <a href="#who-we-serve" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Who We Serve</a>
+                <a href="#why-lumina" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Insights</a>
+                <a href="#contact" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Contact</a>
+                <hr class="border-slate-100">
+                <a href="tel:+16045550102"
+                    class="block text-slate-900 font-bold hover:text-amber-600 transition-colors">604-555-0102</a>
+                <a href="#contact" onclick="toggleMobileMenu()"
+                    class="block w-full px-5 py-3 rounded-lg font-bold text-sm text-white bg-slate-900 hover:bg-slate-800 transition-all">
+                    Book Zoom Consult
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -273,7 +310,7 @@
                     </div>
 
                     <h1
-                        class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] mb-6 opacity-0 animate-hero-headline">
+                        class="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] mb-6 opacity-0 animate-hero-headline">
                         Estate Planning That Saves <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600">1.4%
                             Probate Fees</span> & Family Conflict
@@ -322,12 +359,14 @@
                 </div>
                 <div class="p-4 group">
                     <div class="text-4xl font-bold text-slate-900 mb-1 group-hover:text-amber-600 transition-colors">
-                        <span class="counter" data-target="150">0</span>+</div>
+                        <span class="counter" data-target="150">0</span>+
+                    </div>
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Trusts Established</div>
                 </div>
                 <div class="p-4 group">
                     <div class="text-4xl font-bold text-slate-900 mb-1 group-hover:text-amber-600 transition-colors">
-                        <span class="counter" data-target="450">0</span>+</div>
+                        <span class="counter" data-target="450">0</span>+
+                    </div>
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Families Protected</div>
                 </div>
                 <div class="p-4 flex flex-col justify-center items-center">
@@ -724,6 +763,12 @@
             easing: 'ease-out',
             offset: 50
         });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        }
 
         // Interactive Calculator
         function calculateFee() {
