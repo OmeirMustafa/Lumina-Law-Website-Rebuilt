@@ -87,13 +87,28 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: 8px 0;
-            position: fixed;
-            top: 80px;
-            /* Below nav */
-            width: 100%;
+            padding: 8px 16px;
             z-index: 40;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile vs Desktop Banner Positioning */
+        @media (min-width: 1024px) {
+            .case-study-banner {
+                position: fixed;
+                top: 80px;
+                /* Below nav */
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .case-study-banner {
+                position: relative;
+                /* Flow normally on mobile to avoid blocking */
+                margin-top: 80px;
+                /* Offset for fixed nav */
+            }
         }
 
         .marker-highlight {
@@ -111,17 +126,30 @@
             background-color: rgba(245, 158, 11, 0.2);
             z-index: -1;
         }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu {
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
     </style>
 </head>
 
 <body
-    class="bg-white text-slate-800 font-sans antialiased overflow-x-hidden pt-20 selection:bg-amber-100 selection:text-amber-900">
+    class="bg-white text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-amber-100 selection:text-amber-900">
 
     <!-- Sticky Header -->
     <nav class="fixed top-0 left-0 w-full z-50 institutional-nav" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <!-- Logo (Case Study Brand) -->
-            <a href="#" class="flex items-center gap-2 group">
+            <a href="#" class="flex items-center gap-2 group z-50 relative">
                 <div
                     class="relative w-8 h-8 bg-slate-900 rounded-sm flex items-center justify-center overflow-hidden shadow-sm group-hover:shadow-md transition-all duration-300">
                     <span class="text-white font-serif font-bold text-xl relative z-10">L</span>
@@ -145,19 +173,50 @@
                     View Live Demo
                 </a>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden text-slate-900 focus:outline-none p-2 z-50 relative" onclick="toggleMobileMenu()"
+                aria-label="Toggle Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="lg:hidden bg-white border-b border-slate-200 shadow-xl absolute top-20 left-0 w-full">
+            <div class="px-6 py-6 space-y-4 flex flex-col text-center">
+                <a href="#context" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Business Context</a>
+                <a href="#diagnosis" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Diagnosis</a>
+                <a href="#decisions" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Decisions</a>
+                <a href="#impact" onclick="toggleMobileMenu()"
+                    class="block text-slate-700 font-medium hover:text-amber-600 transition-colors">Expected Impact</a>
+                <hr class="border-slate-100">
+                <a href="demo.html"
+                    class="block w-full px-5 py-3 rounded-lg font-bold text-sm text-white bg-slate-900 hover:bg-slate-800 transition-all">
+                    View Live Demo
+                </a>
+            </div>
         </div>
     </nav>
 
-    <!-- Mandatory Label -->
+    <!-- Mandatory Label (Responsive Fixed on Desktop, Relative on Mobile) -->
+    <!-- See CSS styles for responsive positioning logic -->
     <div class="case-study-banner">
-        Conceptual Strategic Redesign — Based on real industry constraints and user behavior patterns
+        Conceptual Strategic Redesign — Based on real industry constraints
     </div>
 
     <!-- Main Content -->
     <main>
 
         <!-- Hero Section: Business Context -->
-        <section id="context" class="relative h-[90vh] min-h-[650px] flex items-center overflow-hidden m-0 p-0"
+        <section id="context"
+            class="relative h-auto pt-16 pb-20 md:h-[90vh] md:min-h-[650px] md:pt-0 md:pb-0 flex items-center overflow-hidden m-0 p-0"
             id="hero-section">
             <div class="absolute inset-0 z-0 bg-slate-50">
                 <img src="hero-bg-wide.png" alt="Strategic Context" class="w-full h-full object-cover opacity-90"
@@ -167,29 +226,30 @@
             <div class="hidden md:block absolute inset-0 z-10"
                 style="background: linear-gradient(to right, #ffffff 0%, #ffffff 50%, rgba(255,255,255,0.92) 65%, rgba(255,255,255,0) 90%);">
             </div>
-            <div class="md:hidden absolute inset-0 z-10 bg-white/80 backdrop-blur-[2px]"></div>
+            <!-- Mobile Overlay improved for readability -->
+            <div class="md:hidden absolute inset-0 z-10 bg-white/90 backdrop-blur-[2px]"></div>
 
             <div class="relative z-20 max-w-7xl mx-auto px-6 w-full flex items-center h-full">
                 <div class="w-full md:w-3/5 max-w-3xl mx-auto md:mx-0 flex flex-col justify-center pt-10">
 
-                    <div class="mb-6 opacity-0 animate-hero-headline">
+                    <div class="mb-4 md:mb-6 opacity-0 animate-hero-headline">
                         <span
-                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">
+                            class="inline-flex items-center px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">
                             Business Context
                         </span>
                     </div>
 
                     <h1
-                        class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] mb-6 opacity-0 animate-hero-headline">
+                        class="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.15] mb-6 opacity-0 animate-hero-headline">
                         Designing for Trust in a <span class="marker-highlight">Zero-Error Market</span>.
                     </h1>
 
                     <div class="opacity-0 animate-hero-content" style="animation-delay: 200ms;">
-                        <p class="text-lg text-slate-700 font-medium mb-6 leading-relaxed max-w-xl">
+                        <p class="text-base md:text-lg text-slate-700 font-medium mb-6 leading-relaxed max-w-xl">
                             The legal services market is defined by high anxiety and low literacy. Clients don't buy
                             "documents"—they buy the reduction of risk.
                         </p>
-                        <p class="text-base text-slate-600 mb-8 leading-relaxed max-w-xl">
+                        <p class="text-sm md:text-base text-slate-600 mb-8 leading-relaxed max-w-xl">
                             For Lumina Law, the business risk wasn't just aesthetics—it was <strong
                                 class="text-slate-900">hesitation</strong>. The original digital presence failed to
                             signal the institutional authority required to justify premium fees for Estate Planning and
@@ -201,8 +261,8 @@
                         style="animation-delay: 400ms;">
                         <div class="pl-4 border-l-4 border-amber-500">
                             <p class="text-sm font-bold text-slate-900">The Business Objective</p>
-                            <p class="text-sm text-slate-600">Align digital perception with actual legal expertise to
-                                shorten the "trust gap" before the first consultation.</p>
+                            <p class="text-xs md:text-sm text-slate-600">Align digital perception with actual legal
+                                expertise to shorten the "trust gap" before the first consultation.</p>
                         </div>
                     </div>
                 </div>
@@ -210,28 +270,29 @@
         </section>
 
         <!-- Constraints & Realities (Formerly Stats) -->
-        <section class="bg-white border-b border-slate-100 py-16 relative overflow-hidden" data-aos="fade-up">
+        <section class="bg-white border-b border-slate-100 py-12 md:py-16 relative overflow-hidden" data-aos="fade-up">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="grid md:grid-cols-4 gap-8 divide-x divide-slate-100">
-                    <div class="px-4">
+                <!-- Stacks on mobile, Grid on desktop -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:divide-x divide-slate-100">
+                    <div class="px-0 md:px-4">
                         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Constraint 01</h3>
                         <p class="font-bold text-slate-900 text-lg">Conservatism</p>
                         <p class="text-xs text-slate-600 mt-1">Novelty reduces trust. The interface must feel familiar,
                             like a bank or government service.</p>
                     </div>
-                    <div class="px-4">
+                    <div class="px-0 md:px-4">
                         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Constraint 02</h3>
                         <p class="font-bold text-slate-900 text-lg">Compliance</p>
                         <p class="text-xs text-slate-600 mt-1">Law Society rules restrict "guarantees". Claims must be
                             factual and verifiable.</p>
                     </div>
-                    <div class="px-4">
+                    <div class="px-0 md:px-4">
                         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Constraint 03</h3>
                         <p class="font-bold text-slate-900 text-lg">High Stakes</p>
                         <p class="text-xs text-slate-600 mt-1">Users are often deciding on 7-figure asset transfers.
                             Ambiguity is fatal to conversion.</p>
                     </div>
-                    <div class="px-4">
+                    <div class="px-0 md:px-4 pt-8 md:pt-0 border-t md:border-t-0 border-slate-50 mt-4 md:mt-0">
                         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Reality</h3>
                         <p class="font-bold text-slate-900 text-lg">Restraint = Authority</p>
                         <p class="text-xs text-slate-600 mt-1">Over-design or flashy motion signals "startup" risk. The
@@ -242,18 +303,18 @@
         </section>
 
         <!-- Strategic Diagnosis (Formerly Grid) -->
-        <section id="diagnosis" class="bg-slate-50 py-24">
+        <section id="diagnosis" class="bg-slate-50 py-16 md:py-24">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16" data-aos="fade-up">
                     <span class="text-amber-600 font-bold uppercase tracking-widest text-xs mb-2 block">The Audit</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Diagnostic Findings</h2>
-                    <p class="text-lg text-slate-600 leading-relaxed">We analyzed user behavior patterns to identify
-                        where the "Trust Chain" was breaking.</p>
+                    <p class="text-base md:text-lg text-slate-600 leading-relaxed">We analyzed user behavior patterns to
+                        identify where the "Trust Chain" was breaking.</p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Issue 1 -->
-                    <div class="bg-white p-8 rounded-xl border border-slate-100 shadow-sm transition-all"
+                    <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-100 shadow-sm transition-all"
                         data-aos="fade-up" data-aos-delay="100">
                         <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6 text-red-600">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -273,7 +334,7 @@
                     </div>
 
                     <!-- Issue 2 -->
-                    <div class="bg-white p-8 rounded-xl border border-slate-100 shadow-sm transition-all"
+                    <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-100 shadow-sm transition-all"
                         data-aos="fade-up" data-aos-delay="200">
                         <div
                             class="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mb-6 text-amber-600">
@@ -293,7 +354,7 @@
                     </div>
 
                     <!-- Issue 3 -->
-                    <div class="bg-white p-8 rounded-xl border border-slate-100 shadow-sm transition-all"
+                    <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-100 shadow-sm transition-all"
                         data-aos="fade-up" data-aos-delay="300">
                         <div
                             class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-blue-600">
@@ -317,7 +378,7 @@
         </section>
 
         <!-- Redesign Decisions (Formerly Services) -->
-        <section id="decisions" class="max-w-7xl mx-auto px-6 py-24" data-aos="fade-up">
+        <section id="decisions" class="max-w-7xl mx-auto px-6 py-16 md:py-24" data-aos="fade-up">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12">
                 <div>
                     <span class="text-amber-600 font-bold uppercase tracking-widest text-xs mb-2 block">Execution</span>
@@ -325,7 +386,7 @@
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Decision 1 -->
                 <div class="bg-slate-50 p-8 rounded-xl border border-slate-100">
                     <h4 class="text-lg font-bold text-slate-900 mb-3">01. Value-First Hierarchy</h4>
@@ -363,9 +424,9 @@
         </section>
 
         <!-- Feature Spotlight (Formerly Calculator) -->
-        <section class="py-24 px-6 bg-slate-900 relative overflow-hidden" data-aos="fade-up">
+        <section class="py-16 md:py-24 px-6 bg-slate-900 relative overflow-hidden" data-aos="fade-up">
             <div class="max-w-5xl mx-auto text-white">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div>
                         <span class="text-amber-400 font-bold uppercase tracking-widest text-xs mb-2 block">Feature
                             Spotlight</span>
@@ -396,9 +457,8 @@
                         </ul>
                     </div>
 
-                    <!-- Visual representation of the tool (non-interactive here for case study, or kept interactive for demo) -->
-                    <!-- We keep it visual to show the design quality -->
-                    <div class="bg-slate-800 rounded-xl p-8 border border-slate-700 shadow-2xl relative">
+                    <!-- Visual representation of the tool -->
+                    <div class="bg-slate-800 rounded-xl p-6 md:p-8 border border-slate-700 shadow-2xl relative">
                         <div
                             class="absolute top-4 right-4 text-[10px] text-slate-500 uppercase font-bold tracking-widest">
                             UI Component</div>
@@ -420,12 +480,12 @@
         </section>
 
         <!-- Expected Impact (Formerly Testimonials) -->
-        <section id="impact" class="bg-white py-24 border-b border-slate-100">
+        <section id="impact" class="bg-white py-16 md:py-24 border-b border-slate-100">
             <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
                 <span class="text-amber-600 font-bold uppercase tracking-widest text-xs mb-6 block">Outcomes</span>
                 <h2 class="text-3xl font-bold text-slate-900 mb-12">Expected Business Impact</h2>
 
-                <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                     <div class="p-6 bg-slate-50 rounded-lg border border-slate-100">
                         <h4 class="font-bold text-slate-900 mb-2">Reduced Hesitation</h4>
                         <p class="text-sm text-slate-600">By answering "What will this cost?" (Probate) and "Who are
@@ -461,10 +521,17 @@
             </div>
         </footer>
 
-        <!-- JS for AOS -->
+        <!-- Scripts -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
+            // Initialize AOS
             AOS.init({ once: true, duration: 800, offset: 50 });
+
+            // Mobile Menu Toggle
+            function toggleMobileMenu() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('open');
+            }
         </script>
     </main>
 </body>
